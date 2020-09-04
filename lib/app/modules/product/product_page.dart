@@ -2,6 +2,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:siclos/app/modules/cart/cart_controller.dart';
+import 'package:siclos/app/modules/home/home_controller.dart';
 import 'package:siclos/app/modules/product/product_page_params.dart';
 import 'package:siclos/app/shared/models/product_model.dart';
 import 'package:siclos/app/shared/utils/message.dart';
@@ -131,16 +132,20 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
           width: double.infinity,
           height: 50,
           child: RaisedButton(
-            color: Colors.lime,
-            child: Text(
-              'Ir para compra',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+              color: Colors.lime,
+              child: Text(
+                'Ir para compra',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            onPressed: () {},
-          ),
+              onPressed: () {
+                // Modular.to.pushNamed('/cart');
+                HomeController _homeController = Modular.get<HomeController>();
+                Navigator.of(context).pop();
+                _homeController.pageViewConroller.jumpToPage(2);
+              }),
         ),
         SizedBox(
           height: 10,

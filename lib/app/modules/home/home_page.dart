@@ -37,12 +37,23 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
 
   Widget _buildAppBar() {
     return AppBar(
-      title: Text(
-        'Siclos',
-        style: TextStyle(
-          color: Colors.green,
-          fontWeight: FontWeight.bold,
-        ),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/images/icon.png',
+            width: 30,
+            height: 30,
+          ),
+          SizedBox(width: 5),
+          Text(
+            'Siclos',
+            style: TextStyle(
+              color: Colors.green,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
       centerTitle: true,
       backgroundColor: Colors.white,

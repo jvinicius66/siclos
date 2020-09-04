@@ -23,28 +23,14 @@ class _ProductListPageState extends ModularState<ProductListPage, ProductListCon
       children: [
         _buildSearch(),
         _buildCategories(),
-        Expanded(
-          child: Observer(
-            builder: (_) {
-              if (controller.products.error != null) return _buildError();
-              if (controller.products.value == null) return _buildLoading();
-
-              var _list = controller.products.value;
-              return ListView.builder(
-                itemCount: _list.length,
-                physics: BouncingScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) => _buildCard(_list[index]),
-              );
-            },
-          ),
-        ),
+        _buildList(),
       ],
     );
   }
 
   Widget _buildSearch() {
     return Padding(
-      padding: new EdgeInsets.all(8.0),
+      padding: new EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: new TextField(
         autofocus: false,
         readOnly: true,
@@ -88,16 +74,34 @@ class _ProductListPageState extends ModularState<ProductListPage, ProductListCon
           Icon(
             icon,
             size: 40,
-            color: Colors.black26,
+            color: Colors.green[100],
           ),
           Text(
             title,
             style: TextStyle(
-              color: Colors.black26,
+              color: Colors.green[200],
               fontSize: 10,
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildList() {
+    return Expanded(
+      child: Observer(
+        builder: (_) {
+          if (controller.products.error != null) return _buildError();
+          if (controller.products.value == null) return _buildLoading();
+
+          var _list = controller.products.value;
+          return ListView.builder(
+            itemCount: _list.length,
+            physics: BouncingScrollPhysics(),
+            itemBuilder: (BuildContext context, int index) => _buildCard(_list[index]),
+          );
+        },
       ),
     );
   }
