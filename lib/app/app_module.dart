@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:siclos/app/modules/cart/cart_controller.dart';
 import 'package:siclos/app/modules/cart/cart_module.dart';
 import 'package:siclos/app/modules/cart/repositories/cart_repository.dart';
+import 'package:siclos/app/modules/wallet/wallet_module.dart';
 import 'package:siclos/app/shared/constants.dart';
 
 import 'app_controller.dart';
@@ -32,6 +33,7 @@ class AppModule extends MainModule {
           transition: TransitionType.rightToLeft,
         ),
         ModularRouter('/cart', module: CartModule()),
+        ModularRouter('/wallet', module: WalletModule()),
       ];
 
   @override

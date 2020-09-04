@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:siclos/app/modules/cart/cart_controller.dart';
+import 'package:siclos/app/modules/product/product_page_params.dart';
 import 'package:siclos/app/shared/models/product_model.dart';
 import 'product_list_controller.dart';
 
@@ -46,8 +47,10 @@ class _ProductListPageState extends ModularState<ProductListPage, ProductListCon
       padding: new EdgeInsets.all(8.0),
       child: new TextField(
         autofocus: false,
+        readOnly: true,
+        showCursor: true,
         decoration: InputDecoration(
-          hintText: 'Procurar produtos',
+          hintText: 'Procurar produtos, categorias, lojas...',
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         ),
@@ -123,7 +126,7 @@ class _ProductListPageState extends ModularState<ProductListPage, ProductListCon
         leading: _buildImage(product.image, product.id),
         title: _buildTitle(product.name, product.id),
         subtitle: _buildSubTitle(product),
-        onTap: () => Modular.to.pushNamed('/product', arguments: product),
+        onTap: () => Modular.to.pushNamed('/product', arguments: ProductPageParams(productModel: product, isCart: false)),
       ),
     ); //
   }
