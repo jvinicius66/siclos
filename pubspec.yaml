@@ -19,6 +19,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  flushbar: ^1.10.4
   shared_preferences_web: ^0.1.2+7
   shared_preferences: ^0.5.10
   extended_image: ^1.1.1

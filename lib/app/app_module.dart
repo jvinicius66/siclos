@@ -1,3 +1,14 @@
+/*
+ * app_module.dart
+ *
+ * @version     1.0
+ * @package     lib
+ * @subpackage  app
+ * @author      João Borges
+ * @copyright   Copyright (c) 2020 João Borges Ltda. (https://www.linkedin.com/in/joaoborges80/)
+ * @license     https://opensource.org/licenses/MIT
+ * @description Primary app module
+*/
 import 'package:dio/dio.dart';
 import 'package:siclos/app/modules/cart/cart_controller.dart';
 import 'package:siclos/app/modules/cart/cart_module.dart';

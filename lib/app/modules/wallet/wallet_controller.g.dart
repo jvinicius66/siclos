@@ -7,7 +7,7 @@ part of 'wallet_controller.dart';
 // **************************************************************************
 
 final $WalletController = BindInject(
-  (i) => WalletController(i<WalletRepository>()),
+  (i) => WalletController(i<IWalletRepository>()),
   singleton: true,
   lazy: true,
 );
@@ -47,6 +47,13 @@ mixin _$WalletController on _WalletControllerBase, Store {
   @override
   Future<bool> purchase(double value) {
     return _$purchaseAsyncAction.run(() => super.purchase(value));
+  }
+
+  final _$resetAsyncAction = AsyncAction('_WalletControllerBase.reset');
+
+  @override
+  Future<bool> reset() {
+    return _$resetAsyncAction.run(() => super.reset());
   }
 
   @override

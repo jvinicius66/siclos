@@ -7,7 +7,7 @@ part of 'product_list_controller.dart';
 // **************************************************************************
 
 final $ProductListController = BindInject(
-  (i) => ProductListController(i<ProductRepository>()),
+  (i) => ProductListController(i<IProductRepository>()),
   singleton: true,
   lazy: true,
 );

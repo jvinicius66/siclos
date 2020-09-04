@@ -1,3 +1,15 @@
+/*
+ * home_page.dart
+ *
+ * @version     1.0
+ * @package     lib
+ * @subpackage  app/modules/home
+ * @author      João Borges
+ * @copyright   Copyright (c) 2020 João Borges Ltda. (https://www.linkedin.com/in/joaoborges80/)
+ * @license     https://opensource.org/licenses/MIT
+ * @description Main page of the app with tab bottons
+*/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -5,21 +17,27 @@ import 'package:siclos/app/modules/cart/cart_controller.dart';
 import 'package:siclos/app/modules/cart/cart_module.dart';
 import 'package:siclos/app/modules/product_list/product_list_module.dart';
 import 'package:siclos/app/modules/wallet/wallet_module.dart';
-import 'package:siclos/app/shared/utils/message.dart';
 import 'package:siclos/app/shared/widgets/drawer.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
-  final String title;
-  const HomePage({Key key, this.title = "Home"}) : super(key: key);
+  const HomePage({Key key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
-  CartController _cart = Modular.get<CartController>();
+  /*
+  * @variable    : _scaffoldKey
+  * @description : Manipulation GlobalKey of Scaffold
+  */
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  /*
+  * @variable    : _cart
+  * @description : Cart Controller to show counter in badge
+  */
+  CartController _cart = Modular.get<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +53,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     );
   }
 
+  /*
+  * @method      : _buildAppBar
+  * @description : Buil main app bar
+  */
   Widget _buildAppBar() {
     return AppBar(
       title: Row(
@@ -77,6 +99,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     );
   }
 
+  /*
+  * @method      : _buildBody
+  * @description : Build main structure with three pages
+  */
   Widget _buildBody() {
     return PageView(
       controller: controller.pageViewConroller,
@@ -88,6 +114,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     );
   }
 
+  /*
+  * @method      : _buildBottom
+  * @description : Build bottom tabs os navigation
+  */
   Widget _buildBottom() {
     return AnimatedBuilder(
       animation: controller.pageViewConroller,
@@ -150,6 +180,12 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     );
   }
 
+  /*
+  * @method      : _onBackPressed
+  * @description : Capture back button pressed to exit app
+  * @result      : True if click twice back button
+  * @inspired on : https://stackoverflow.com/questions/53496161/how-to-write-a-double-back-button-pressed-to-exit-app-using-flutter
+  */
   DateTime _currentBackPressTime;
   Future<bool> _onBackPressed() {
     if (_scaffoldKey.currentState.isDrawerOpen) {
@@ -159,7 +195,22 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     DateTime now = DateTime.now();
     if ((_currentBackPressTime == null) || now.difference(_currentBackPressTime) > Duration(seconds: 3)) {
       _currentBackPressTime = now;
-      Message.snak(_scaffoldKey, 'Pressone novamente para sair');
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+        content: Text(
+          'Pressone novamente para sair',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 18,
+            color: Theme.of(_scaffoldKey.currentContext).brightness == Brightness.dark
+                ? Theme.of(_scaffoldKey.currentContext).accentColor
+                : Theme.of(_scaffoldKey.currentContext).primaryTextTheme.headline6.color,
+          ),
+        ),
+        duration: Duration(seconds: 2),
+        backgroundColor: Theme.of(_scaffoldKey.currentContext).primaryColor.withOpacity(0.8),
+      ));
       return Future.value(false);
     }
     return Future.value(true);

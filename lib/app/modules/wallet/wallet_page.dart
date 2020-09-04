@@ -1,19 +1,28 @@
+/*
+ * wallet_page.dart
+ *
+ * @version     1.0
+ * @package     lib
+ * @subpackage  app/modules/wallet
+ * @author      João Borges
+ * @copyright   Copyright (c) 2020 João Borges Ltda. (https://www.linkedin.com/in/joaoborges80/)
+ * @license     https://opensource.org/licenses/MIT
+ * @description Wallet Page where it shows the balance and loans
+*/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'wallet_controller.dart';
 
 class WalletPage extends StatefulWidget {
-  final String title;
-  const WalletPage({Key key, this.title = "Wallet"}) : super(key: key);
+  const WalletPage({Key key}) : super(key: key);
 
   @override
   _WalletPageState createState() => _WalletPageState();
 }
 
 class _WalletPageState extends ModularState<WalletPage, WalletController> {
-  // final WalletController _walletController = Modular.get<WalletController>();
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -27,6 +36,10 @@ class _WalletPageState extends ModularState<WalletPage, WalletController> {
     );
   }
 
+  /*
+  * @method      : _buildBalance
+  * @description : Build the balance widget
+  */
   Container _buildBalance() {
     return Container(
       margin: EdgeInsets.all(15),
@@ -102,6 +115,10 @@ class _WalletPageState extends ModularState<WalletPage, WalletController> {
     );
   }
 
+  /*
+  * @method      : _eventTitle
+  * @description : Build the event title widget
+  */
   Widget _eventTitle() {
     return Observer(builder: (_) {
       if (controller.balance >= 0) return Center();
@@ -133,6 +150,10 @@ class _WalletPageState extends ModularState<WalletPage, WalletController> {
     });
   }
 
+  /*
+  * @method      : _eventList
+  * @description : Build the event list widget
+  */
   Widget _eventList() {
     return Observer(builder: (_) {
       if (controller.balance >= 0) return Center();
@@ -165,6 +186,10 @@ class _WalletPageState extends ModularState<WalletPage, WalletController> {
     });
   }
 
+  /*
+  * @method      : _tileDecoration
+  * @description : Build the tile decoration used in _eventList
+  */
   BoxDecoration _tileDecoration() {
     return BoxDecoration(
       color: Colors.white,

@@ -1,3 +1,15 @@
+/*
+ * wallet_module.dart
+ *
+ * @version     1.0
+ * @package     lib
+ * @subpackage  app/modules/wallet
+ * @author      João Borges
+ * @copyright   Copyright (c) 2020 João Borges Ltda. (https://www.linkedin.com/in/joaoborges80/)
+ * @license     https://opensource.org/licenses/MIT
+ * @description Module of wallet
+*/
+
 import 'package:siclos/app/modules/wallet/repositories/wallet_repository.dart';
 
 import 'wallet_controller.dart';

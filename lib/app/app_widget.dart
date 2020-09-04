@@ -1,3 +1,14 @@
+/*
+ * app_widget.dart
+ *
+ * @version     1.0
+ * @package     lib
+ * @subpackage  app
+ * @author      João Borges
+ * @copyright   Copyright (c) 2020 João Borges Ltda. (https://www.linkedin.com/in/joaoborges80/)
+ * @license     https://opensource.org/licenses/MIT
+ * @description Primary app structure
+*/
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

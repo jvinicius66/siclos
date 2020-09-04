@@ -7,7 +7,7 @@ part of 'cart_controller.dart';
 // **************************************************************************
 
 final $CartController = BindInject(
-  (i) => CartController(i<CartRepository>()),
+  (i) => CartController(i<dynamic>()),
   singleton: true,
   lazy: true,
 );

@@ -1,15 +1,31 @@
+/*
+ * product_page.dart
+ *
+ * @version     1.0
+ * @package     lib
+ * @subpackage  app/modules/product
+ * @author      João Borges
+ * @copyright   Copyright (c) 2020 João Borges Ltda. (https://www.linkedin.com/in/joaoborges80/)
+ * @license     https://opensource.org/licenses/MIT
+ * @description Page of detail of Product
+*/
+
 import 'package:extended_image/extended_image.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:siclos/app/modules/cart/cart_controller.dart';
 import 'package:siclos/app/modules/home/home_controller.dart';
 import 'package:siclos/app/modules/product/product_page_params.dart';
 import 'package:siclos/app/shared/models/product_model.dart';
-import 'package:siclos/app/shared/utils/message.dart';
 import 'product_controller.dart';
 
 class ProductPage extends StatefulWidget {
   final ProductPageParams params;
+  /*
+  * @method                   : constructor
+  * @param[ProductPageParams] : class of parameters
+  */
   const ProductPage({Key key, @required this.params}) : super(key: key);
 
   @override
@@ -17,8 +33,20 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends ModularState<ProductPage, ProductController> {
+  /*
+  * @variable    : _scaffoldKey
+  * @description : Manipulation GlobalKey of Scaffold
+  */
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  /*
+  * @variable    : _product
+  * @description : Manipulation product data
+  */
   ProductModel _product;
+  /*
+  * @variable    : _isCart
+  * @description : Condition if the page is called by cart
+  */
   bool _isCart;
 
   @override
@@ -40,7 +68,7 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          'DETALHES DO PRODUTO',
+          'Detalhes do Produto',
           style: TextStyle(
             color: Colors.green,
           ),
@@ -64,6 +92,10 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
     );
   }
 
+  /*
+  * @method      : _buildImage
+  * @description : Build image of product
+  */
   Widget _buildImage() {
     return Stack(
       children: [
@@ -93,6 +125,10 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
     );
   }
 
+  /*
+  * @method      : _buildTitle
+  * @description : Build title of product
+  */
   Widget _buildTitle() {
     return Container(
       padding: EdgeInsets.only(top: 8),
@@ -107,7 +143,11 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
     );
   }
 
-  _buildDescription() {
+  /*
+  * @method      : _buildDescription
+  * @description : Build description of product
+  */
+  Widget _buildDescription() {
     return Container(
       padding: EdgeInsets.all(16),
       child: Text(
@@ -122,6 +162,10 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
     );
   }
 
+  /*
+  * @method      : _buildButtons
+  * @description : Build buttons of add to cart and go to cart
+  */
   Widget _buildButtons() {
     return Column(
       children: [
@@ -141,7 +185,6 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
                 ),
               ),
               onPressed: () {
-                // Modular.to.pushNamed('/cart');
                 HomeController _homeController = Modular.get<HomeController>();
                 Navigator.of(context).pop();
                 _homeController.pageViewConroller.jumpToPage(2);
@@ -165,7 +208,18 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
             onPressed: () {
               CartController _cart = Modular.get<CartController>();
               _cart.addProduct(_product);
-              Message.snak(_scaffoldKey, 'Produto adicionando no carrinho');
+              Flushbar(
+                flushbarPosition: FlushbarPosition.TOP,
+                flushbarStyle: FlushbarStyle.GROUNDED,
+                message: 'Produto adicionando no carrinho',
+                icon: Icon(
+                  Icons.add_shopping_cart,
+                  size: 28.0,
+                  color: Colors.green[300],
+                ),
+                duration: Duration(seconds: 2),
+                leftBarIndicatorColor: Colors.green[300],
+              )..show(context);
             },
           ),
         ),
@@ -173,6 +227,10 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
     );
   }
 
+  /*
+  * @method      : _buildCaracteristics
+  * @description : Build characteristics of products
+  */
   Widget _buildCaracteristics() {
     return Container(
       padding: EdgeInsets.all(16),
@@ -211,6 +269,10 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
     );
   }
 
+  /*
+  * @method      : _circularColor
+  * @description : Build widget of colors paint
+  */
   Widget _circularColor(Color color) {
     return Container(
       decoration: BoxDecoration(

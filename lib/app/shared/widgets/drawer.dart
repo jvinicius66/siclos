@@ -1,3 +1,16 @@
+/*
+ * drawer.dart
+ *
+ * @version     1.0
+ * @package     lib
+ * @subpackage  app/shared/widgets
+ * @author      João Borges
+ * @copyright   Copyright (c) 2020 João Borges Ltda. (https://www.linkedin.com/in/joaoborges80/)
+ * @license     https://opensource.org/licenses/MIT
+ * @description Widget of drawer customized
+ * @inspired on https://github.com/lohanidamodar/flutter_ui_challenges
+*/
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:siclos/app/modules/wallet/wallet_controller.dart';

@@ -1,3 +1,15 @@
+/*
+ * cart_module.dart
+ *
+ * @version     1.0
+ * @package     lib
+ * @subpackage  app/modules/cart
+ * @author      João Borges
+ * @copyright   Copyright (c) 2020 João Borges Ltda. (https://www.linkedin.com/in/joaoborges80/)
+ * @license     https://opensource.org/licenses/MIT
+ * @description Module of Cart
+*/
+
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:siclos/app/modules/cart/cart_controller.dart';
 import 'package:siclos/app/modules/wallet/repositories/wallet_repository.dart';

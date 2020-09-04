@@ -1,3 +1,15 @@
+/*
+ * product_list_module.dart
+ *
+ * @version     1.0
+ * @package     lib
+ * @subpackage  app/modules/product_list
+ * @author      João Borges
+ * @copyright   Copyright (c) 2020 João Borges Ltda. (https://www.linkedin.com/in/joaoborges80/)
+ * @license     https://opensource.org/licenses/MIT
+ * @description Module of product_list
+*/
+
 import 'package:dio/dio.dart';
 import 'package:siclos/app/modules/product_list/repositories/product_list_repository.dart';
 

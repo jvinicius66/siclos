@@ -1,3 +1,15 @@
+/*
+ * home_page.dart
+ *
+ * @version     1.0
+ * @package     lib
+ * @subpackage  app/modules/home
+ * @author      João Borges
+ * @copyright   Copyright (c) 2020 João Borges Ltda. (https://www.linkedin.com/in/joaoborges80/)
+ * @license     https://opensource.org/licenses/MIT
+ * @description Module of home page
+*/
+
 import 'home_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

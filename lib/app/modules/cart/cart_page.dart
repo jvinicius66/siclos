@@ -1,3 +1,16 @@
+/*
+ * cart_page.dart
+ *
+ * @version     1.0
+ * @package     lib
+ * @subpackage  app/modules/cart
+ * @author      João Borges
+ * @copyright   Copyright (c) 2020 João Borges Ltda. (https://www.linkedin.com/in/joaoborges80/)
+ * @license     https://opensource.org/licenses/MIT
+ * @description Page of cart
+*/
+
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -7,14 +20,17 @@ import 'package:siclos/app/shared/models/product_model.dart';
 import 'cart_controller.dart';
 
 class CartPage extends StatefulWidget {
-  final String title;
-  const CartPage({Key key, this.title = "Cart"}) : super(key: key);
+  const CartPage({Key key}) : super(key: key);
 
   @override
   _CartPageState createState() => _CartPageState();
 }
 
 class _CartPageState extends ModularState<CartPage, CartController> {
+  /*
+  * @variable    : _walletController
+  * @description : Wallet Controller to calculation of balance
+  */
   final WalletController _walletController = Modular.get<WalletController>();
 
   @override
@@ -57,39 +73,69 @@ class _CartPageState extends ModularState<CartPage, CartController> {
     });
   }
 
+  /*
+  * @method         : _buildCard
+  * @description    : Build card of the show product
+  * @param[product] : Product to manupulation data
+  * @param[index]   : Item Index to delete object
+  */
   Widget _buildCard(ProductModel product, int index) {
     return Card(
       elevation: 1,
       child: ListTile(
         contentPadding: EdgeInsets.all(15),
         leading: _buildImage(product.image, product.id),
-        title: _buildTitle(product.name, product.id),
-        subtitle: _buildSubTitle(product.price),
+        title: _buildTitle(product.name),
+        subtitle: _buildPrice(product.price),
         trailing: _buildDeleteAction(index),
         onTap: () => Modular.to.pushNamed('/product', arguments: ProductPageParams(productModel: product, isCart: true)),
       ),
     ); //
   }
 
+  /*
+  * @method         : _buildImage
+  * @description    : Build image of product (cached)
+  * @param[uriFile] : URI to file of the product
+  * @param[id]      : Product ID to Hero animation
+  */
   Widget _buildImage(String uriFile, int id) {
     return Hero(
       tag: 'product_cart_$id',
-      child: Image.network(
+      child: ExtendedImage.network(
         uriFile,
-        width: 100,
-        height: 100,
+        height: 300,
+        fit: BoxFit.fill,
+        cache: true,
+        border: Border.all(color: Colors.red, width: 1.0),
+        borderRadius: BorderRadius.all(Radius.circular(30.0)),
       ),
     );
   }
 
-  Widget _buildTitle(String title, int id) {
+  /*
+  * @method       : _buildTitle
+  * @description  : Build title of the product
+  * @param[title] : Title of the product
+  */
+  Widget _buildTitle(String title) {
     return Text(title);
   }
 
-  Widget _buildSubTitle(double price) {
+  /*
+  * @method       : _buildPrice
+  * @description  : Build price of the product
+  * @param[price] : Price of the product
+  */
+  Widget _buildPrice(double price) {
     return Text(price.toStringAsFixed(2));
   }
 
+  /*
+  * @method       : _buildDeleteAction
+  * @description  : Build action of delete record
+  * @param[index] : Index of delete in list
+  */
   IconButton _buildDeleteAction(int index) {
     return IconButton(
       icon: Icon(
@@ -100,6 +146,10 @@ class _CartPageState extends ModularState<CartPage, CartController> {
     );
   }
 
+  /*
+  * @method       : _confirmDialog
+  * @description  : Alert of confirmation to checkout
+  */
   void _confirmDialog() {
     double _totalProductsInCart = controller.getTotal();
     double _balance = _walletController.balance;

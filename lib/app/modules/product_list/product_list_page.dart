@@ -1,3 +1,15 @@
+/*
+ * producet_list_page.dart
+ *
+ * @version     1.0
+ * @package     lib
+ * @subpackage  app/modules/product_list
+ * @author      João Borges
+ * @copyright   Copyright (c) 2020 João Borges Ltda. (https://www.linkedin.com/in/joaoborges80/)
+ * @license     https://opensource.org/licenses/MIT
+ * @description Page of list of products
+*/
+
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -15,6 +27,10 @@ class ProductListPage extends StatefulWidget {
 }
 
 class _ProductListPageState extends ModularState<ProductListPage, ProductListController> with SingleTickerProviderStateMixin {
+  /*
+  * @variable    : _cart
+  * @description : Cart Controller used in add Product operation
+  */
   CartController _cart = Modular.get<CartController>();
 
   @override
@@ -28,6 +44,10 @@ class _ProductListPageState extends ModularState<ProductListPage, ProductListCon
     );
   }
 
+  /*
+  * @method      : _buildSearch
+  * @description : Build search widget 
+  */
   Widget _buildSearch() {
     return Padding(
       padding: new EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -44,6 +64,10 @@ class _ProductListPageState extends ModularState<ProductListPage, ProductListCon
     );
   }
 
+  /*
+  * @method      : _buildCategories
+  * @description : Build categories widget 
+  */
   Widget _buildCategories() {
     return Container(
       height: 70,
@@ -66,6 +90,12 @@ class _ProductListPageState extends ModularState<ProductListPage, ProductListCon
     );
   }
 
+  /*
+  * @method       : _categoryIcon
+  * @description  : Build categories Icon widget 
+  * @param[icon]  : Icon of presentation
+  * @param[title] : Text of title presentation
+  */
   Widget _categoryIcon(IconData icon, String title) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10),
@@ -88,6 +118,10 @@ class _ProductListPageState extends ModularState<ProductListPage, ProductListCon
     );
   }
 
+  /*
+  * @method      : _buildList
+  * @description : Build list items of presentation
+  */
   Widget _buildList() {
     return Expanded(
       child: Observer(
@@ -106,6 +140,10 @@ class _ProductListPageState extends ModularState<ProductListPage, ProductListCon
     );
   }
 
+  /*
+  * @method      : _buildError
+  * @description : Build widget of error
+  */
   Widget _buildError() {
     return Center(
       child: RaisedButton(
@@ -118,23 +156,38 @@ class _ProductListPageState extends ModularState<ProductListPage, ProductListCon
     );
   }
 
+  /*
+  * @method      : _buildLoading
+  * @description : Build widget of loading
+  */
   Widget _buildLoading() {
     return Center(child: CircularProgressIndicator());
   }
 
+  /*
+  * @method         : _buildCard
+  * @description    : Build card item of List
+  * @param[product] : Model of Product to show data
+  */
   Widget _buildCard(ProductModel product) {
     return Card(
       elevation: 1,
       child: ListTile(
         contentPadding: EdgeInsets.all(15),
         leading: _buildImage(product.image, product.id),
-        title: _buildTitle(product.name, product.id),
+        title: _buildTitle(product.name),
         subtitle: _buildSubTitle(product),
         onTap: () => Modular.to.pushNamed('/product', arguments: ProductPageParams(productModel: product, isCart: false)),
       ),
     ); //
   }
 
+  /*
+  * @method         : _buildImage
+  * @description    : Build image of product
+  * @param[uriFile] : URI of the image file
+  * @param[id]      : ID of product to make Hero animation
+  */
   Widget _buildImage(String uriFile, int id) {
     return Hero(
       tag: 'product_$id',
@@ -172,10 +225,19 @@ class _ProductListPageState extends ModularState<ProductListPage, ProductListCon
     );
   }
 
-  Widget _buildTitle(String title, int id) {
+  /*
+  * @method       : _buildTitle
+  * @description  : Build title of product
+  * @param[title] : Title of presentation
+  */
+  Widget _buildTitle(String title) {
     return Text(title);
   }
 
+  /*
+  * @method       : _buildSubTitle
+  * @description  : Build description, price and buttons of cad product
+  */
   Widget _buildSubTitle(ProductModel product) {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
