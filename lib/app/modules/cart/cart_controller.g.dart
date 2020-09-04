@@ -60,6 +60,50 @@ mixin _$CartController on _CartControllerBase, Store {
   }
 
   @override
+  void removeFromPosition(int position) {
+    final _$actionInfo = _$_CartControllerBaseActionController.startAction(
+        name: '_CartControllerBase.removeFromPosition');
+    try {
+      return super.removeFromPosition(position);
+    } finally {
+      _$_CartControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removeFromProduct(ProductModel product) {
+    final _$actionInfo = _$_CartControllerBaseActionController.startAction(
+        name: '_CartControllerBase.removeFromProduct');
+    try {
+      return super.removeFromProduct(product);
+    } finally {
+      _$_CartControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void clear() {
+    final _$actionInfo = _$_CartControllerBaseActionController.startAction(
+        name: '_CartControllerBase.clear');
+    try {
+      return super.clear();
+    } finally {
+      _$_CartControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  double getTotal() {
+    final _$actionInfo = _$_CartControllerBaseActionController.startAction(
+        name: '_CartControllerBase.getTotal');
+    try {
+      return super.getTotal();
+    } finally {
+      _$_CartControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 cart: ${cart}

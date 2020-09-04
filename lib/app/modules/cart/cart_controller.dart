@@ -33,9 +33,27 @@ abstract class _CartControllerBase with Store {
   }
 
   @action
-  void removeProduct(int position) {
+  void removeFromPosition(int position) {
     cart.removeAt(position);
-    //cart.removeWhere((item) => item.hashCode == product.hashCode);
     repository.save(cart);
+  }
+
+  @action
+  void removeFromProduct(ProductModel product) {
+    cart.removeWhere((item) => item.hashCode == product.hashCode);
+    repository.save(cart);
+  }
+
+  @action
+  void clear() {
+    cart.clear();
+    repository.save(cart);
+  }
+
+  @action
+  double getTotal() {
+    double _total = 0;
+    cart.forEach((ProductModel product) => _total += product.price);
+    return _total;
   }
 }

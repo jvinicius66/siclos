@@ -2,13 +2,14 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:siclos/app/modules/cart/cart_controller.dart';
+import 'package:siclos/app/modules/product/product_page_params.dart';
 import 'package:siclos/app/shared/models/product_model.dart';
 import 'package:siclos/app/shared/utils/message.dart';
 import 'product_controller.dart';
 
 class ProductPage extends StatefulWidget {
-  final ProductModel product;
-  const ProductPage({Key key, @required this.product}) : super(key: key);
+  final ProductPageParams params;
+  const ProductPage({Key key, @required this.params}) : super(key: key);
 
   @override
   _ProductPageState createState() => _ProductPageState();
@@ -16,6 +17,15 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends ModularState<ProductPage, ProductController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  ProductModel _product;
+  bool _isCart;
+
+  @override
+  void initState() {
+    super.initState();
+    _product = widget.params.productModel;
+    _isCart = widget.params.isCart;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +55,7 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
               _buildTitle(),
               _buildDescription(),
               _buildCaracteristics(),
-              _buildAddCart(),
+              (!this._isCart) ? _buildButtons() : Center(),
             ],
           ),
         ),
@@ -57,10 +67,10 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
     return Stack(
       children: [
         Hero(
-          tag: 'product_${widget.product.id}',
+          tag: (!this._isCart ? 'product_${_product.id}' : 'product_cart_${_product.id}'),
           child: Center(
             child: ExtendedImage.network(
-              widget.product.image,
+              _product.image,
               height: 300,
               fit: BoxFit.fill,
               cache: true,
@@ -86,7 +96,7 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
     return Container(
       padding: EdgeInsets.only(top: 8),
       child: Text(
-        widget.product.name,
+        _product.name,
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -100,7 +110,7 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
     return Container(
       padding: EdgeInsets.all(16),
       child: Text(
-        widget.product.description,
+        _product.description,
         textAlign: TextAlign.justify,
         style: TextStyle(
           height: 1.5,
@@ -111,7 +121,7 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
     );
   }
 
-  Widget _buildAddCart() {
+  Widget _buildButtons() {
     return Column(
       children: [
         SizedBox(
@@ -149,7 +159,7 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
             ),
             onPressed: () {
               CartController _cart = Modular.get<CartController>();
-              _cart.addProduct(widget.product);
+              _cart.addProduct(_product);
               Message.snak(_scaffoldKey, 'Produto adicionando no carrinho');
             },
           ),
@@ -182,7 +192,7 @@ class _ProductPageState extends ModularState<ProductPage, ProductController> {
             children: <Widget>[
               Text('Preço \$'),
               Text(
-                widget.product.price.toStringAsFixed(2),
+                _product.price.toStringAsFixed(2),
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
