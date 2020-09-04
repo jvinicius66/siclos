@@ -146,7 +146,7 @@ class _ProductListPageState extends ModularState<ProductListPage, ProductListCon
             case LoadState.failed:
               return GestureDetector(
                 child: Image.asset(
-                  'assets/images/placeholder.png',
+                  'assets/images/icon.png',
                   fit: BoxFit.contain,
                 ),
                 onTap: () => state.reLoadImage(),
