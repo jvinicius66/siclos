@@ -49,3 +49,8 @@ For the solution, the following packages will be used:
 |<img src="screens/1.jpg" width="250"> |<img src="screens/2.jpg" width="250"> |<img src="screens/3.jpg" width="250"> |
 | Saldo| Carrinho | Empréstimo |
 |<img src="screens/4.jpg" width="250"> |<img src="screens/5.jpg" width="250"> |<img src="screens/6.jpg" width="250">|
+
+<video autoplay>
+  <video width="268" height="480">
+  <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+</video>
