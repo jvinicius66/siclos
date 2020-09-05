@@ -25,7 +25,27 @@ It is a Drummond spin-off focused on the development of solutions focused on the
 ---
 ## For solution:
 
-Para a solução, serão utilizados os seguintes pacotes:
+For the solution, the following packages will be used:
 
 - [flutter_native_splash 0.1.9](https://pub.dev/packages/flutter_native_splash)
 - [flutter_launcher_icons 0.7.5](https://pub.dev/packages/flutter_launcher_icons)
+- [mockito 4.1.2](https://pub.dev/packages/mockito)
+- [modular_codegen 2.0.0+1](https://pub.dev/packages/modular_codegen)
+- [mobx_codegen 1.1.0+1](https://pub.dev/packages/mobx_codegen)
+- [build_runner 1.10.1](https://pub.dev/packages/build_runner)
+- [flushbar 1.10.4](https://pub.dev/packages/flushbar)
+- [shared_preferences_web 0.1.2+7](https://pub.dev/packages/shared_preferences_web)
+- [shared_preferences 0.5.10](https://pub.dev/packages/shared_preferences)
+- [extended_image 1.1.1](https://pub.dev/packages?q=extended_image)
+- [dio 3.0.10](https://pub.dev/packages/dio)
+- [flutter_mobx 1.1.0+2](https://pub.dev/packages/flutter_mobx)
+- [mobx 1.2.1+2](https://pub.dev/packages/mobx)
+- [flutter_modular 2.0.0+1](https://pub.dev/packages/flutter_modular)
+
+## Screenshots:
+
+|Lista de produtos|Detalhes do produto 1|Detalhes do Produto 2|
+|-|-|-|
+|<img src="screens/1.jpg" width="250"> |<img src="screens/2.jpg" width="250"> |<img src="screens/3.jpg" width="250"> |
+| Saldo| Carrinho | Empréstimo |
+|<img src="screens/4.jpg" width="250"> |<img src="screens/5.jpg" width="250"> |<img src="screens/6.jpg" width="250">|
